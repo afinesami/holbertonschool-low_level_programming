@@ -1,0 +1,26 @@
+#include "holberton.h"
+/**
+ *_strstr - find substring in initial string
+ *@haystack: initial string to be searched
+ *@needle: substring to be found
+ *
+ *Return: substring if found, NULL if not found
+ */
+char *_strstr(char *haystack, char *needle)
+{
+	while (*haystack)
+	{
+		char *hay = haystack;
+		char *new = needle;
+
+		while (*haystack && *new && *haystack == *new)
+		{
+			haystack++;
+			new++;
+		}
+		if (!*new)
+			return (hay);
+		haystack = hay + 1;
+	}
+	return (NULL);
+}
