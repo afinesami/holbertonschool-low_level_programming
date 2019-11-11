@@ -1,62 +1,53 @@
 #include "holberton.h"
-
 /**
- * _strlen - calculate string length
- * @a: pointer to a string
- * Return: lenght of string
- **/
-int _strlen(char *a)
-{
-	int i = 0;
-
-	while (*a != '\0')
-		i++, a++;
-	return (i);
-}
-/**
- * *infinite_add - adds two numbers
- * @n1: pointer to number1
- * @n2: pointer to number2
- * @r: buffer to store result
- * @size_r: buffer size
- * Return: pointer to the result
- **/
+ * infinite_add -  adds two numbers
+ * @n1: first number
+ * @n2: second number
+ * @r: result
+ * @size_r: result lenght
+ * Return: sum
+ *
+ */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
-{
-	int k, n2_s, n1_s, m;
 
-	r[size_r] = '\0';
-	k = 0;
-	m = 0;
-	n1_s = _strlen(n1);
-	n2_s = _strlen(n2);
-	size_r--;
-	if (n1_s > size_r || n2_s > size_r || size_r == 0 ||
-			(n1_s == size_r && n2_s == size_r &&
-			 (n1[0] - '0') + (n2[0] - '0') > 9))
+{
+/* local variable declaration */
+	int i = 0, j = 0, k, l = 0, f, s, d = 0;
+
+	while (n1[i] != '\0')
+		i++;
+	while (n2[j] != '\0')
+		j++;
+	if (i > j)
+		l = i;
+	else
+		l = j;
+	if (l + 1 > size_r)
+		return (0);
+	r[l] = '\0';
+	for (k = l - 1 ; k >= 0 ; k--)
 	{
-	return (0);
-	}
-	n1_s--;
-	n2_s--;
-	while (n1_s >= 0 || n2_s >= 0)
-	{
-		if (n1_s < 0)
-			m = n2[n2_s] - '0' + k;
-		else if (n2_s < 0)
-			m = n1[n1_s] - '0' + k;
+		i--;
+		j--;
+		if (i >= 0)
+			f = n1[i] - '0';
 		else
-			m = (n1[n1_s] - '0') + (n2[n2_s] - '0') + k;
-		r[size_r] = (m % 10) + '0';
-		k = m / 10;
-		n1_s--, n2_s--, size_r--;
+			f = 0;
+		if (j >= 0)
+			s = n2[j] - '0';
+		else
+			s = 0;
+		r[k] = (f + s + d) % 10 + '0';
+		d = (f + s + d) / 10;
 	}
-	if (size_r > 0 && (k < 9 && k > 0))
+	if (d == 1)
 	{
-		r[size_r] = k + '0';
-		return (r + size_r);
+		r[l + 1] = '\0';
+		if (l + 2 > size_r)
+			return (0);
+		while (l-- >= 0)
+			r[l + 1] = r[l];
+		r[0] = d + '0';
 	}
-	else if (k == 0)
-		return (r + size_r);
-	return (0);
+	return (r);
 }
