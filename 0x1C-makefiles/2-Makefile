@@ -1,0 +1,12 @@
+# Make Holberton executable with variables: CC, SRC, OBJ, NAME
+
+CC = gcc
+SRC = main.c holberton.c
+OBJ = $(SRC:.c=.o)
+NAME = holberton
+
+all: $(OBJ)
+	$(CC) $? -o $(NAME)
+
+%.o: %.c
+	$(CC) -c -o $@ $<
