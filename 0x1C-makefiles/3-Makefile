@@ -9,6 +9,9 @@ RM = rm -f
 all: $(OBJ)
 	$(CC) $? -o $(NAME)
 
+%.o: %.c
+	$(CC) -c -o $@ $<
+
 oclean:
 	$(RM) $(OBJ)
 
